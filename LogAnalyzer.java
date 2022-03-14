@@ -63,12 +63,14 @@ public class LogAnalyzer
      */
     public int busiestHour()
     {
+        int hourCount = 0;
         int busyHour = 0;
-        for(int hours = 0; hours < hourCounts.length ; hours++)
+        for(int hours = 0; hours < hourCounts.length; hours++)
         {
-            if(hourCounts[hours] > busyHour)
+            if(hourCounts[hours] > hourCount)
             {
-                busyHour = hourCounts[hours];
+                hourCount = hourCounts[hours];
+                busyHour = hours;
             }
         }
         return busyHour;
