@@ -140,4 +140,15 @@ public class LogAnalyzer
         }
         return startingBusyHour;
     }
+    
+    public int quietestDay()
+    {
+        int quietDay = 0;
+        while(reader.hasNext()) {
+            LogEntry entry = reader.next();
+            int day = entry.getHour();
+            hourCounts[hour]++;
+        }
+        return quietDay;
+    }
 }
