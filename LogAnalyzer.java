@@ -60,6 +60,7 @@ public class LogAnalyzer
     
     /**
      * Returns the busiest hour recorded
+     * @return busyHour The busiest hour recorded
      */
     public int busiestHour()
     {
@@ -78,6 +79,7 @@ public class LogAnalyzer
     
     /**
      * Returns the quietest hour recorded
+     * @return quietHour The quiestest hour recorded
      */
     public int quietestHour()
     {
@@ -108,7 +110,8 @@ public class LogAnalyzer
     }
     
     /**
-     * Returns the busiest two days recorded in the log file
+     * Returns the busiest two hours recorded in the log file
+     * @return startingBusyHour The starting hour of the busiest two hou
      */
     public int busiestTwoHours()
     {
@@ -146,13 +149,14 @@ public class LogAnalyzer
     
     /**
      * Returns the busiest day recorded in the log file
+     * @return busyDay The busiest day of the year
      */
     public int busiestDay()
     {
         int[] dayCounts = new int[365];
         while(reader.hasNext()) {
             LogEntry entry = reader.next();
-            int day = entry.getDay();
+            int day = entry.getDay() - 1;
             dayCounts[day]++;
         }
         
@@ -167,5 +171,31 @@ public class LogAnalyzer
             }
         }
         return busyDay;
+    }
+    
+     /**
+     * Returns the quietest day recorded in the log file
+     * @return quietDay The quietest day of the year
+     */
+    public int quietestDay()
+    {
+        int[] dayCounts = new int[28];
+        while(reader.hasNext()) {
+            LogEntry entry = reader.next();
+            int day = entry.getDay() - 1;
+            dayCounts[day]++;
+        }
+        
+        int dayCount = dayCounts[0];
+        int quietDay = 0;
+        for(int days = 0; days < dayCounts.length; days++)
+        {
+            if(dayCounts[days] < dayCount)
+            {
+                dayCount = dayCounts[days];
+                quietDay = days;
+            }
+        }
+        return quietDay;
     }
 }
