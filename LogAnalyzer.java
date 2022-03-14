@@ -16,11 +16,11 @@ public class LogAnalyzer
      * @param logFile The name of the log file.
      * @param logSize The size of the log file entries
      */
-    public LogAnalyzer(String logFile, int logSize)
+    public LogAnalyzer(String logFile)
     { 
         // Create the array object to hold the hourly
         // access counts.
-        hourCounts = new int[logSize];
+        hourCounts = new int[24];
         // Create the reader to obtain the data.
         reader = new LogfileReader(logFile);
     }
@@ -64,7 +64,7 @@ public class LogAnalyzer
     public int busiestHour()
     {
         int busyHour = 0;
-        for(int hours = 0; hours < hourCounts.length ;hours++)
+        for(int hours = 0; hours < hourCounts.length ; hours++)
         {
             if(hourCounts[hours] > busyHour)
             {
