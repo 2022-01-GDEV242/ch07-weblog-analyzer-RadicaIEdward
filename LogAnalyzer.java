@@ -121,31 +121,22 @@ public class LogAnalyzer
                 int hour3 = hourCounts[hours + 2];
                 if(hour1 + hour2 > hour2 + hour3)
                 {
-                    hourCountSum = hour1 + hour2;  
+                    hourCountSum = hour1 + hour2;
                 }
                 else
                 {
-                    hourCountSum = hour2 + hour3;  
-                }
-                if(hourCountSum > largestSum)
-                {
-                    largestSum = hourCountSum;
-                    startingBusyHour = hours;
-                } 
-                else if(hourCountSum == largestSum)
-                {
-                    startingBusyHour = hours;
+                    hourCountSum = hour2 + hour3;
                 }
             }
             else if (hours == hourCounts.length - 2)
             {
                 hourCountSum = hourCounts[hourCounts.length - 1] + hourCounts[hourCounts.length - 2];
             }
-            else
+            if(hourCountSum >= largestSum)
             {
-                
-            }
-            
+                largestSum = hourCountSum;
+                startingBusyHour = hours;
+            } 
         }
         return startingBusyHour;
     }
