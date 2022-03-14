@@ -106,4 +106,47 @@ public class LogAnalyzer
         }
         return total;
     }
+    
+    public int busiestTwoHours()
+    {
+        int largestSum = 0;
+        int hourCountSum = 0;
+        int startingBusyHour = 0;
+        for(int hours = 0; hours < hourCounts.length; hours++)
+        {
+            if(hours < hourCounts.length - 2)
+            {
+                int hour1 = hourCounts[hours];
+                int hour2 = hourCounts[hours + 1];
+                int hour3 = hourCounts[hours + 2];
+                if(hour1 + hour2 > hour2 + hour3)
+                {
+                    hourCountSum = hour1 + hour2;  
+                }
+                else
+                {
+                    hourCountSum = hour2 + hour3;  
+                }
+                if(hourCountSum > largestSum)
+                {
+                    largestSum = hourCountSum;
+                    startingBusyHour = hours;
+                } 
+                else if(hourCountSum == largestSum)
+                {
+                    startingBusyHour = hours;
+                }
+            }
+            else if (hours == hourCounts.length - 2)
+            {
+                hourCountSum = hourCounts[hourCounts.length - 1] + hourCounts[hourCounts.length - 2];
+            }
+            else
+            {
+                
+            }
+            
+        }
+        return startingBusyHour;
+    }
 }
