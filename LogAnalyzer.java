@@ -107,6 +107,9 @@ public class LogAnalyzer
         return total;
     }
     
+    /**
+     * Returns the busiest two days recorded in the log file
+     */
     public int busiestTwoHours()
     {
         int largestSum = 0;
@@ -141,14 +144,28 @@ public class LogAnalyzer
         return startingBusyHour;
     }
     
-    public int quietestDay()
+    /**
+     * Returns the busiest day recorded in the log file
+     */
+    public int busiestDay()
     {
-        int quietDay = 0;
+        int[] dayCounts = new int[365];
         while(reader.hasNext()) {
             LogEntry entry = reader.next();
-            int day = entry.getHour();
-            hourCounts[hour]++;
+            int day = entry.getDay();
+            dayCounts[day]++;
         }
-        return quietDay;
+        
+        int dayCount = 0;
+        int busyDay = 0;
+        for(int days = 0; days < dayCounts.length; days++)
+        {
+            if(dayCounts[days] > dayCount)
+            {
+                dayCount = dayCounts[days];
+                busyDay = days;
+            }
+        }
+        return busyDay;
     }
 }
