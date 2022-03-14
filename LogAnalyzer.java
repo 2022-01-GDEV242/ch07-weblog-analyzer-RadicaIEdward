@@ -77,6 +77,24 @@ public class LogAnalyzer
     }
     
     /**
+     * Returns the quietest hour recorded
+     */
+    public int quietestHour()
+    {
+        int hourCount = hourCounts[0];
+        int quietHour = 0;
+        for(int hours = 0; hours < hourCounts.length; hours++)
+        {
+            if(hourCounts[hours] < hourCount)
+            {
+                hourCount = hourCounts[hours];
+                quietHour = hours;
+            }
+        }
+        return quietHour;
+    }
+    
+    /**
      * Return the number of accesses recorded in the log file
      */
     public int numberOfAccesses()
