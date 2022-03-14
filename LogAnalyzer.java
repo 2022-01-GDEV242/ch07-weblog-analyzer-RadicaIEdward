@@ -153,7 +153,7 @@ public class LogAnalyzer
      */
     public int busiestDay()
     {
-        int[] dayCounts = new int[365];
+        int[] dayCounts = new int[28];
         while(reader.hasNext()) {
             LogEntry entry = reader.next();
             int day = entry.getDay() - 1;
@@ -173,7 +173,7 @@ public class LogAnalyzer
         return busyDay;
     }
     
-     /**
+    /**
      * Returns the quietest day recorded in the log file
      * @return quietDay The quietest day of the year
      */
@@ -197,5 +197,57 @@ public class LogAnalyzer
             }
         }
         return quietDay;
+    }
+    
+    /**
+     * Returns the busiest month recorded in the log file
+     * @return busyMonth The busiest month of the year
+     */
+    public int busiestMonth()
+    {
+        int[] monthCounts = new int[12];
+        while(reader.hasNext()) {
+            LogEntry entry = reader.next();
+            int month = entry.getMonth() - 1;
+            monthCounts[month]++;
+        }
+        
+        int monthCount = 0;
+        int busyMonth = 0;
+        for(int months = 0; months < monthCounts.length; months++)
+        {
+            if(monthCounts[months] > monthCount)
+            {
+                monthCount = monthCounts[months];
+                busyMonth = months;
+            }
+        }
+        return busyMonth;
+    }
+    
+    /**
+     * Returns the quietest month recorded in the log file
+     * @return quietMonth The quietest month of the year
+     */
+    public int quietestMonth()
+    {
+        int[] monthCounts = new int[12];
+        while(reader.hasNext()) {
+            LogEntry entry = reader.next();
+            int month = entry.getMonth() - 1;
+            monthCounts[month]++;
+        }
+        
+        int monthCount = monthCounts[0];
+        int quietMonth = 0;
+        for(int months = 0; months < monthCounts.length; months++)
+        {
+            if(monthCounts[months] < monthCount)
+            {
+                monthCount = monthCounts[months];
+                quietMonth = months;
+            }
+        }
+        return quietMonth;
     }
 }
